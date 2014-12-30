@@ -1,11 +1,9 @@
-require 'omniauth'
+require 'omniauth/strategies/oauth2'
 
-module Omniauth
+module OmniAuth
   module Strategies
-  	class Elitmus
-  		 include OmniAuth::Strategy
-  		 
-	      option :name, :elitmus
+  	class Elitmus < OmniAuth::Strategies::OAuth2
+  		  option :name, :elitmus
 	      
 	      option :client_options => {
 	      	:site => "http://127.0.0.1:3000",
