@@ -1,8 +1,10 @@
-require 'omniauth/strategies/oauth2'
+require 'omniauth'
 
 module Omniauth
   module Strategies
-  	class Elitmus < OmniAuth::Strategies::OAuth2
+  	class Elitmus
+  		 include OmniAuth::Strategy
+  		 
 	      option :name, :elitmus
 	      
 	      option :client_options => {
