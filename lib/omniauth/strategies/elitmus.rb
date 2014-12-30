@@ -3,7 +3,8 @@ require 'omniauth/strategies/oauth2'
 module Omniauth
   module Strategies
   	class Elitmus < OmniAuth::Strategies::OAuth2
-	      #option :name, :elitmuscampus
+	      option :name, :elitmus
+	      
 	      option :client_options => {
 	      	:site => "http://127.0.0.1:3000",
 	      	:authorize_path => "/oauth/authorize",
