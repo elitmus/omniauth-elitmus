@@ -6,8 +6,8 @@ module Omniauth
    		include OmniAuth::Strategy
 	      #option :name, :elitmuscampus
 	      option :client_options => {
-	      	:site => "http://127.0.0.1:3000"
-	      	:authorize_path => "/oauth/authorize"
+	      	:site => "http://127.0.0.1:3000",
+	      	:authorize_path => "/oauth/authorize",
 	      	:token_path => "/oauth/token"
 	      }
 
