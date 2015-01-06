@@ -1,6 +1,8 @@
 # Omniauth::Elitmus
 
-TODO: Write a gem description
+eLitmus.com OAuth2 Strategy for OmniAuth
+
+Supports the OAuth 2.0 server-side and client-side flows for 3rd party OAuth consumer applications
 
 ## Installation
 
@@ -12,7 +14,7 @@ gem 'omniauth-elitmus'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -24,7 +26,7 @@ TODO: Write usage instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/omniauth-elitmus/fork )
+1. Fork it ( https://github.com/elitmus/omniauth-elitmus/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
