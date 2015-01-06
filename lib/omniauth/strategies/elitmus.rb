@@ -4,13 +4,7 @@ module OmniAuth
   module Strategies
   	class Elitmus < OmniAuth::Strategies::OAuth2
   		  option :name, :elitmus
-	      
-	      option :client_options => {
-	      	:site => "http://127.0.0.1:3000",
-	      	:authorize_path => "/oauth/authorize",
-	      	:token_path => "/oauth/token"
-	      }
-
+  		  
 	      option :authorize_params, [:scope, :display, :auth_type]
 
 	      uid {  raw_info["id"]  }
