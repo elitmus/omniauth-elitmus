@@ -57,7 +57,7 @@ end
 
 ### Auth_type
 
-Optionally specifies the requested authentication feature. Valid values are 'reauthenticate'(asks the user to re-authenticate unconditionally) or nil (re-use the same session if exists and authenticate user). If not specified then default value is nil.
+Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any) 
 
 ```ruby
 use OmniAuth::Builder do
