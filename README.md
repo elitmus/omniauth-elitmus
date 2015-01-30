@@ -2,7 +2,7 @@
 
 eLitmus OAuth2 Strategy for OmniAuth
 
-This is official OmniAuth strategy for authenticating to eLitmus.com. To use it, you'll need to register your consumer application on elitmus.com to get pair of OAuth2 Application ID and Secret on eLitmus.com. It supports the OAuth 2.0 server-side and client-side flows for 3rd party OAuth consumer applications 
+This is official OmniAuth strategy for authenticating to eLitmus.com. To use it, you'll need to register your consumer application on elitmus.com to get pair of OAuth2 Application ID and Secret.   It supports the OAuth 2.0 server-side and client-side flows for 3rd party OAuth consumer applications 
 
 ## Installation
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
     $ gem install omniauth-elitmus
 
-## Basic Usage
+## Usage
 
 OmniAuth::Strategies::Elitmus is simply a Rack middleware.
 
@@ -42,30 +42,26 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 end
 ```
 
-## Scope
+## Configuration
 
-lets you set scopes to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" options to define scope 
+# Scope
+
+lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope 
 
 
 ```ruby
 use OmniAuth::Builder do
-  provider :github, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], :scope => "admin"
+  provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], :scope => "admin"
 end
 ```
 
-## Display
-
-
-
-
-
-## Auth_type
+# Auth_type
 
 Optionally specifies the requested authentication feature. Valid values are 'reauthenticate'(asks the user to re-authenticate unconditionally) or nil (re-use the same session if exists and authenticate user). If not specified then default value is nil.
 
 ```ruby
 use OmniAuth::Builder do
-  provider :github, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
+  provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
   		:authorize_params => {
     		:auth_type => "reauthenticate"
     	}
