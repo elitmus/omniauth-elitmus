@@ -36,20 +36,20 @@ Rails.application.config.middleware.use OmniAuth::Builder do
           :token_path => ELITMUS_AUTH_CONFIG['provider_token_endpoint']
      	},
     	:authorize_params => {
-    		:scope => "public",
-    		:display => "page"
-    	}
+    		:auth_type => "reauthenticate"
+    	},
+      :scope => "public"
 end
 ```
 
 ## Scope
 
-lets you set scopes to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. 
+lets you set scopes to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" options to define scope 
 
 
 ```ruby
 use OmniAuth::Builder do
-  provider :github, ENV['FACEBOOK_KEY'], ENV['GITHUB_SECRET'], :scope => "write,admin"
+  provider :github, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], :scope => "admin"
 end
 ```
 
@@ -65,7 +65,7 @@ Optionally specifies the requested authentication feature. Valid values are 'rea
 
 ```ruby
 use OmniAuth::Builder do
-  provider :github, ENV['FACEBOOK_KEY'], ENV['GITHUB_SECRET'], 
+  provider :github, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
   		:authorize_params => {
     		:auth_type => "reauthenticate"
     	}
