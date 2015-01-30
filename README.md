@@ -44,7 +44,7 @@ end
 
 ## Configuration
 
-# Scope
+### Scope
 
 lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope 
 
@@ -55,7 +55,7 @@ use OmniAuth::Builder do
 end
 ```
 
-# Auth_type
+### Auth_type
 
 Optionally specifies the requested authentication feature. Valid values are 'reauthenticate'(asks the user to re-authenticate unconditionally) or nil (re-use the same session if exists and authenticate user). If not specified then default value is nil.
 
