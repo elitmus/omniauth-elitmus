@@ -39,8 +39,8 @@ You can configure several options, which you pass in to the `provider` method vi
 
 Option name | Default | Explanation
 --- | --- | ---
-`scope` | `email` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope. Refer 'Example' section below. See the Facebook docs for a full list of available permissions: https://developers.facebook.com/docs/reference/login/
-`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any). Refer 'Example' section below. 
+`scope` | `email` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope. please refer 'Examples' section below. See the Facebook docs for a full list of available permissions: https://developers.facebook.com/docs/reference/login/
+`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any). refer 'Examples' section below. 
 
 ## Examples 
 
