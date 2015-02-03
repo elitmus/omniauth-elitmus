@@ -36,12 +36,12 @@ end
 
 ## Configuration
 
-You can configure several options, which you can pass in to the `provider` method via a `Hash`:
+You can configure several options, which you can pass in to the `provider` method via a `Hash`. also refer 'Examples' section accordingly.
 
 Option name | Default | Explanation
 --- | --- | ---
-`scope` | `public` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope. please refer 'Examples' section below. See the Facebook docs for a full list of available permissions: https://developers.facebook.com/docs/reference/login/
-`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any). refer 'Examples' section below.
+`scope` | `public` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope.
+`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (asks the user to re-authenticate unconditionally). If not specified, default value is nil. (reuses the existing session of last authenticated user if any).
 `display` | `page` | The display context to show the authentication page. Options are: `page`, `popup` and `touch`.
 
 ## Examples 
