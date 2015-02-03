@@ -70,7 +70,8 @@ If not specified, default is nil.
 ```ruby
 use OmniAuth::Builder do
   provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
-      { :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }}
+      { :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }, 
+        :display => 'page'}
 end
 ```
 If not specified, default is 'page'.
