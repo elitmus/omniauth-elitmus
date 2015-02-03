@@ -41,8 +41,12 @@ You can configure several options, which you pass in to the `provider` method vi
 Option name | Default | Explanation
 --- | --- | ---
 `scope` | `public` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope. please refer 'Examples' section below. See the Facebook docs for a full list of available permissions: https://developers.facebook.com/docs/reference/login/
+`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any). refer 'Examples' section below.
+`display` | `page` | The display context to show the authentication page. Options are: `page`, `popup` and `touch`.
 
-#### Example :
+## Examples 
+
+### scope
 
 ```ruby
 use OmniAuth::Builder do
@@ -51,11 +55,17 @@ end
 ```
 If not specified, default scope is 'public'
 
-Option name | Default | Explanation
---- | --- | ---
-`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any). refer 'Examples' section below.
+### auth_type
 
-#### Example :
+```ruby
+use OmniAuth::Builder do
+  provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
+  		{ :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }}
+end
+```
+If not specified, default is nil.
+
+### display
 
 ```ruby
 use OmniAuth::Builder do
@@ -63,33 +73,7 @@ use OmniAuth::Builder do
       { :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }}
 end
 ```
-If not specified, default is nil.
-
-Option name | Default | Explanation
---- | --- | ---
-`display` | `page` | The display context to show the authentication page. Options are: `page`, `popup` and `touch`.
-
-
-#### Example :
-
-```ruby
-use OmniAuth::Builder do
-  provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
-      { :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }, :display => "page" }
-end
-```
 If not specified, default is 'page'.
-
-
-## Examples 
-
-### Scope
-
-
-
-### Auth_type
-
-
 
 ## Auth Hash
 
@@ -97,18 +81,11 @@ Here's an example *Auth Hash* available in `request.env['omniauth.auth']`:
 
 ```ruby
 {
-  :provider => 'facebook',
+  :provider => 'elitmus',
   :uid => '1234567',
   :info => {
-    :nickname => 'jbloggs',
     :email => 'joe@bloggs.com',
-    :name => 'Joe Bloggs',
-    :first_name => 'Joe',
-    :last_name => 'Bloggs',
-    :image => 'http://graph.facebook.com/1234567/picture?type=square',
-    :urls => { :Facebook => 'http://www.facebook.com/jbloggs' },
-    :location => 'Palo Alto, California',
-    :verified => true
+    :name => 'Joe Bloggs'
   },
   :credentials => {
     :token => 'ABCDEF...', # OAuth 2.0 access_token, which you may wish to store
@@ -118,18 +95,14 @@ Here's an example *Auth Hash* available in `request.env['omniauth.auth']`:
   :extra => {
     :raw_info => {
       :id => '1234567',
-      :name => 'Joe Bloggs',
-      :first_name => 'Joe',
-      :last_name => 'Bloggs',
-      :link => 'http://www.facebook.com/jbloggs',
-      :username => 'jbloggs',
-      :location => { :id => '123456789', :name => 'Palo Alto, California' },
-      :gender => 'male',
+      :channel => 'Through a friend',
       :email => 'joe@bloggs.com',
-      :timezone => -8,
-      :locale => 'en_US',
-      :verified => true,
-      :updated_time => '2011-11-11T06:21:03+0000'
+      :name => 'Joe Bloggs'
+      :email_lower => 'joe@bloggs.com',
+      :first_login => 'Y',
+      :registered_on => '2012-01-17T00:37:29+05:30',
+      :source_campus => '0',
+      :status => 'active'
     }
   }
 }
