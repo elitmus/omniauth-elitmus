@@ -24,7 +24,8 @@ Or install it yourself as:
 
 OmniAuth::Strategies::Elitmus is simply a Rack middleware.
 
-Here's a quick example, adding the middleware to a Rails app in config/initializers/omniauth.rb:
+Here's a quick example, adding the middleware to a Rails app in config/initializers/omniauth.rb.
+You need to assign your consumer app_id, secret to ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'] variables respectively. To get app_id and secret you need to register your application at 'www.elitmus.com/oauth/applications'.
 
 
 ```ruby
@@ -39,31 +40,51 @@ You can configure several options, which you pass in to the `provider` method vi
 
 Option name | Default | Explanation
 --- | --- | ---
-`scope` | `email` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope. please refer 'Examples' section below. See the Facebook docs for a full list of available permissions: https://developers.facebook.com/docs/reference/login/
-`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any). refer 'Examples' section below. 
-
-## Examples 
-
-### Scope
+`scope` | `public` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope. please refer 'Examples' section below. See the Facebook docs for a full list of available permissions: https://developers.facebook.com/docs/reference/login/
 
 ```ruby
 use OmniAuth::Builder do
   provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], { :scope => "admin" }
 end
 ```
+If not specified, default scope is 'public'
 
-### Auth_type
+
+--- | --- | ---
+`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any). refer 'Examples' section below.
+
 
 ```ruby
 use OmniAuth::Builder do
   provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
-  		:authorize_params => {
-    		:auth_type => "reauthenticate"
-    	}
+      { :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }}
 end
 ```
+If not specified, default is nil.
 
-### Callback_path
+
+--- | --- | ---
+`display` | `page` | The display context to show the authentication page. Options are: `page`, `popup` and `touch`.
+
+
+```ruby
+use OmniAuth::Builder do
+  provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
+      { :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }, :display => "page" }
+end
+```
+If not specified, default is 'page'.
+
+
+## Examples 
+
+### Scope
+
+
+
+### Auth_type
+
+
 
 ## Auth Hash
 
