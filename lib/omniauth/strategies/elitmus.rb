@@ -8,12 +8,12 @@ module OmniAuth
 				
 			DEFAULT_SCOPE = 'public'
 
-			OATUH2_PROVIDER_URL = "https://www.elitmus.com"
+			#OATUH2_PROVIDER_URL = "https://www.elitmus.com"
 
 			option :client_options, {
-				:site => OATUH2_PROVIDER_URL,
-				:authorize_url => "#{OATUH2_PROVIDER_URL}/oauth/authorize",
-				:token_url => "#{OATUH2_PROVIDER_URL}/oauth/token"
+				:site => "https://www.elitmus.com",
+				:authorize_url => "https://www.elitmus.com/oauth/authorize",
+				:token_url => "https://www.elitmus.com/oauth/token"
 			}
 
 			option :authorize_options, [:scope, :display, :auth_type]
