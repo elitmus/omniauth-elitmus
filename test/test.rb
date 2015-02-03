@@ -6,15 +6,31 @@ class StrategyTest < StrategyTestCase
 end
 
 class ClientTest < StrategyTestCase
-  test 'has correct Elitmus site' do
+  test 'has correct default Elitmus site' do
     assert_equal 'https://www.elitmus.com', strategy.client.site
   end
 
-  test 'has correct authorize url' do
+  test 'has correct default authorize url' do
     assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
   end
 
-  test 'has correct token url' do
+  test 'has correct default token url' do
+    assert_equal '/oauth/token', strategy.client.options[:token_url]
+  end
+
+  test 'should be initialized with only site in client_options' do
+    @options = { :client_options => { 'site' => 'https://staging.shrey.com' } }
+    # @options = { :client_options => { :site => 'https://www.elitmus.com' , :authorize_path => '/oauth/authorize', :token_path => "/oauth/token" } }
+    assert_equal 'https://staging.shrey.com', strategy.client.site
+    assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
+    assert_equal '/oauth/token', strategy.client.options[:token_url]
+  end
+
+  test 'should be initialized with site and authorize_url in client_options' do
+    @options = { :client_options => { 'site' => 'https://staging.shrey.com', 'authorize_url' => '/custom/auth' } }
+    # @options = { :client_options => { :site => 'https://www.elitmus.com' , :authorize_path => '/oauth/authorize', :token_path => "/oauth/token" } }
+    assert_equal 'https://staging.shrey.com', strategy.client.site
+    assert_equal '/custom/auth', strategy.client.options[:authorize_url]
     assert_equal '/oauth/token', strategy.client.options[:token_url]
   end
 
@@ -25,6 +41,7 @@ class ClientTest < StrategyTestCase
     assert_equal '/custom/auth', strategy.client.options[:authorize_url]
     assert_equal '/custom/token', strategy.client.options[:token_url]
   end
+
 end
 
 class CallbackUrlTest < StrategyTestCase
