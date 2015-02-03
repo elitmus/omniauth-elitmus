@@ -44,9 +44,9 @@ Option name | Default | Explanation
 `auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (asks the user to re-authenticate unconditionally). If not specified, default value is nil. (reuses the existing session of last authenticated user if any).
 `display` | `page` | The display context to show the authentication page. Options are: `page`, `popup` and `touch`.
 
-## Examples 
+### Examples 
 
-### scope
+#### scope
 
 ```ruby
 use OmniAuth::Builder do
@@ -55,7 +55,7 @@ end
 ```
 If not specified, default scope is 'public'
 
-### auth_type
+#### auth_type
 
 ```ruby
 use OmniAuth::Builder do
@@ -65,7 +65,7 @@ end
 ```
 If not specified, default is nil.
 
-### display
+#### display
 
 ```ruby
 use OmniAuth::Builder do
