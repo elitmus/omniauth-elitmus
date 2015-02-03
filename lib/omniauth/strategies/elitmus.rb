@@ -12,7 +12,7 @@ module OmniAuth
 
 			option :client_options, {
 				:site => "https://www.elitmus.com",
-				:authorize_url => "https://www.elitmus.com/oauth/authorize",
+				:authorize_url => "/oauth/authorize",
 				:token_url => "/oauth/token"
 			}
 
