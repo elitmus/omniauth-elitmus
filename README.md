@@ -42,6 +42,8 @@ Option name | Default | Explanation
 --- | --- | ---
 `scope` | `public` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope. please refer 'Examples' section below. See the Facebook docs for a full list of available permissions: https://developers.facebook.com/docs/reference/login/
 
+#### Example :
+
 ```ruby
 use OmniAuth::Builder do
   provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], { :scope => "admin" }
@@ -49,10 +51,11 @@ end
 ```
 If not specified, default scope is 'public'
 
-
+Option name | Default | Explanation
 --- | --- | ---
 `auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (it asks the user to re-authenticate unconditionally). If not specified, default value is nil. (it reuses the existing session of last authenticated user if any). refer 'Examples' section below.
 
+#### Example :
 
 ```ruby
 use OmniAuth::Builder do
@@ -62,10 +65,12 @@ end
 ```
 If not specified, default is nil.
 
-
+Option name | Default | Explanation
 --- | --- | ---
 `display` | `page` | The display context to show the authentication page. Options are: `page`, `popup` and `touch`.
 
+
+#### Example :
 
 ```ruby
 use OmniAuth::Builder do
