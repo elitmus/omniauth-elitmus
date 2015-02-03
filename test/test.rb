@@ -169,57 +169,6 @@ class RawInfoTest < StrategyTestCase
     @options = {:appsecret_proof => @appsecret_proof}
   end
 
-  # test 'performs a GET to https://graph.facebook.com/me' do
-  #   strategy.stubs(:appsecret_proof).returns(@appsecret_proof)
-  #   strategy.stubs(:access_token).returns(@access_token)
-  #   params = {:params => @options}
-  #   @access_token.expects(:get).with('/me', params).returns(stub_everything('OAuth2::Response'))
-  #   strategy.raw_info
-  # end
-
-  # test 'performs a GET to https://graph.facebook.com/me with locale' do
-  #   @options.merge!({ :locale => 'cs_CZ' })
-  #   strategy.stubs(:access_token).returns(@access_token)
-  #   strategy.stubs(:appsecret_proof).returns(@appsecret_proof)
-  #   @params = {:params => @options}
-  #   @access_token.expects(:get).with('/me', @params).returns(stub_everything('OAuth2::Response'))
-  #   strategy.raw_info
-  # end
-
-  # test 'performs a GET to https://graph.facebook.com/me with info_fields' do
-  #   @options.merge!({:info_fields => 'about'})
-  #   strategy.stubs(:access_token).returns(@access_token)
-  #   strategy.stubs(:appsecret_proof).returns(@appsecret_proof)
-  #   params = {:params => {:appsecret_proof => @appsecret_proof, :fields => 'about'}}
-  #   @access_token.expects(:get).with('/me', params).returns(stub_everything('OAuth2::Response'))
-  #   strategy.raw_info
-  # end
-
-  # test 'returns a Hash' do
-  #   strategy.stubs(:access_token).returns(@access_token)
-  #  # strategy.stubs(:appsecret_proof).returns(@appsecret_proof)
-  #   raw_response = stub('Faraday::Response')
-  #   raw_response.stubs(:body).returns('{ "ohai": "thar" }')
-  #   raw_response.stubs(:status).returns(200)
-  #   raw_response.stubs(:headers).returns({'Content-Type' => 'application/json' })
-  #   oauth2_response = OAuth2::Response.new(raw_response)
-  #   params = {:params => @options}
-  #   @access_token.stubs(:get).with('/api/v1/me', params).returns(oauth2_response)
-  #   p strategy.uid
-  #  # assert_kind_of Hash, strategy.raw_info
-  #  # assert_equal 'thar', strategy.raw_info['ohai']
-  # end
-
-  test 'returns an empty hash when the response is false' do
-    strategy.stubs(:access_token).returns(@access_token)
-    strategy.stubs(:appsecret_proof).returns(@appsecret_proof)
-    oauth2_response = stub('OAuth2::Response', :parsed => false)
-    params = {:params => @options}
-    @access_token.stubs(:get).with('/me', params).returns(oauth2_response)
-    assert_kind_of Hash, strategy.raw_info
-    assert_equal({}, strategy.raw_info)
-  end
-
   test 'should not include raw_info in extras hash when skip_info is specified' do
     @options = { :skip_info => true }
     strategy.stubs(:raw_info).returns({:foo => 'bar' })
