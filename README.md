@@ -36,7 +36,7 @@ end
 
 ## Configuration
 
-You can configure several options, which you pass in to the `provider` method via a `Hash`:
+You can configure several options, which you can pass in to the `provider` method via a `Hash`:
 
 Option name | Default | Explanation
 --- | --- | ---
