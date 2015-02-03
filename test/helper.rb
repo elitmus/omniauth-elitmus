@@ -1,6 +1,10 @@
 require 'bundler/setup'
 require 'minitest/autorun'
-require 'mocha/setup'
+require 'mocha/mini_test'
+require 'simplecov'
+
+SimpleCov.start
+
 require 'omniauth/strategies/elitmus'
 
 OmniAuth.config.test_mode = true
@@ -36,7 +40,7 @@ class StrategyTestCase < TestCase
     @request.stubs(:params).returns({})
     @request.stubs(:cookies).returns({})
     @request.stubs(:env).returns({})
-    @request.stubs(:scheme).returns({})
+    @request.stubs(:scheme).returns('http')
     @request.stubs(:ssl?).returns(false)
 
     @client_id = '123'

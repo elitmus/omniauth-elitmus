@@ -1,2 +1,2 @@
-require 'omniauth/strategies/elitmus'
 require 'omniauth/elitmus/version'
+require 'omniauth/strategies/elitmus'
