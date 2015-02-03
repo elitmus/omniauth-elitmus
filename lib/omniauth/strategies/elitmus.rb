@@ -1,18 +1,18 @@
 require 'omniauth/strategies/oauth2'
+require 'uri'
 
 module OmniAuth
 	module Strategies
 		class Elitmus < OmniAuth::Strategies::OAuth2
-			 class NoAuthorizationCodeError < StandardError; end
-			 # option :name, :elitmus
-				
+			# class NoAuthorizationCodeError < StandardError; en				
 			DEFAULT_SCOPE = 'public'
 
 			#OATUH2_PROVIDER_URL = "https://www.elitmus.com"
+			option :name, :elitmus
 
 			option :client_options, {
 				:site => "https://www.elitmus.com",
-				:authorize_url => "https://www.elitmus.com/oauth/authorize",
+				:authorize_url => "/oauth/authorize",
 				:token_url => "/oauth/token"
 			}
 
