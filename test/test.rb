@@ -15,15 +15,15 @@ class ClientTest < StrategyTestCase
   end
 
   test 'has correct token url' do
-    assert_equal 'https://www.elitmus.com/oauth/token', strategy.client.options[:token_url]
+    assert_equal '/oauth/token', strategy.client.options[:token_url]
   end
 
   test 'should be initialized with symbolized client_options' do
-    @options = { :client_options => { 'site' => 'https://staging.shrey.com', 'authorize_url' => 'https://staging.shrey.com/custom/auth', 'token_url' => 'https://staging.shrey.com/custom/token' } }
+    @options = { :client_options => { 'site' => 'https://staging.shrey.com', 'authorize_url' => 'https://staging.shrey.com/custom/auth', 'token_url' => '/custom/token' } }
     # @options = { :client_options => { :site => 'https://www.elitmus.com' , :authorize_path => '/oauth/authorize', :token_path => "/oauth/token" } }
     assert_equal 'https://staging.shrey.com', strategy.client.site
     assert_equal 'https://staging.shrey.com/custom/auth', strategy.client.options[:authorize_url]
-    assert_equal 'https://staging.shrey.com/custom/token', strategy.client.options[:token_url]
+    assert_equal '/custom/token', strategy.client.options[:token_url]
   end
 end
 
