@@ -20,7 +20,6 @@ class ClientTest < StrategyTestCase
 
   test 'should be initialized with only site in client_options' do
     @options = { :client_options => { 'site' => 'https://staging.shrey.com' } }
-    # @options = { :client_options => { :site => 'https://www.elitmus.com' , :authorize_path => '/oauth/authorize', :token_path => "/oauth/token" } }
     assert_equal 'https://staging.shrey.com', strategy.client.site
     assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
     assert_equal '/oauth/token', strategy.client.options[:token_url]
@@ -28,7 +27,6 @@ class ClientTest < StrategyTestCase
 
   test 'should be initialized with site and authorize_url in client_options' do
     @options = { :client_options => { 'site' => 'https://staging.shrey.com', 'authorize_url' => '/custom/auth' } }
-    # @options = { :client_options => { :site => 'https://www.elitmus.com' , :authorize_path => '/oauth/authorize', :token_path => "/oauth/token" } }
     assert_equal 'https://staging.shrey.com', strategy.client.site
     assert_equal '/custom/auth', strategy.client.options[:authorize_url]
     assert_equal '/oauth/token', strategy.client.options[:token_url]
@@ -36,7 +34,6 @@ class ClientTest < StrategyTestCase
 
   test 'should be initialized with symbolized client_options' do
     @options = { :client_options => { 'site' => 'https://staging.shrey.com', 'authorize_url' => '/custom/auth', 'token_url' => '/custom/token' } }
-    # @options = { :client_options => { :site => 'https://www.elitmus.com' , :authorize_path => '/oauth/authorize', :token_path => "/oauth/token" } }
     assert_equal 'https://staging.shrey.com', strategy.client.site
     assert_equal '/custom/auth', strategy.client.options[:authorize_url]
     assert_equal '/custom/token', strategy.client.options[:token_url]
@@ -91,11 +88,11 @@ class AuthorizeParamsTest < StrategyTestCase
     assert_equal 'public', strategy.authorize_params[:scope]
   end
 
-  test 'includes display parameter from request when present' do
-    @request.stubs(:params).returns({ 'display' => 'page' })
-    assert strategy.authorize_params.is_a?(Hash)
-    assert_equal 'page', strategy.authorize_params[:display]
-  end
+  # test 'includes display parameter from request when present' do
+  #   @request.stubs(:params).returns({ 'display' => 'page' })
+  #   assert strategy.authorize_params.is_a?(Hash)
+  #   assert_equal 'page', strategy.authorize_params[:display]
+  # end
 
   test 'includes auth_type parameter from request when present' do
     @request.stubs(:params).returns({ 'auth_type' => 'reauthenticate' })

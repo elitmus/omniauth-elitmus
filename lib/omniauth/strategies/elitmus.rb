@@ -11,12 +11,10 @@ module OmniAuth
 			option :name, :elitmus
 
 			option :client_options, {
-				:site => "https://www.elitmus.com",
-				:authorize_url => "/oauth/authorize",
-				:token_url => "/oauth/token"
+				:site => "https://www.elitmus.com"
 			}
 
-			option :authorize_options, [:scope, :display, :auth_type]
+			option :authorize_options, [:scope, :auth_type]
 
 			uid {  raw_info['id']  }
 		
@@ -34,22 +32,22 @@ module OmniAuth
 			end 
 
 			def raw_info
-				@raw_info ||= access_token.get('/api/v1/me').parsed# || {}
+				@raw_info ||= access_token.get('/api/v1/me').parsed
 			end
 
 			def authorize_params
 				super.tap do |params|
-					%w[display scope auth_type].each do |v|
+					%w[scope auth_type].each do |v|
 							if request.params[v]
-									params[v.to_sym] = request.params[v]
-									end
+								params[v.to_sym] = request.params[v]
+							end
 					end
 					params[:scope] ||= DEFAULT_SCOPE
 				end
 			end	
 
 			def callback_url
-					options[:callback_url] || super
+				options[:callback_url] || super
 			end
 
 			def prune!(hash)
@@ -58,12 +56,6 @@ module OmniAuth
 					value.nil? || (value.respond_to?(:empty?) && value.empty?)
         		end
      		end
-
-     		 def info_options
-		         params = Hash.new
-		        # params.merge!({:locale => options[:locale]}) if options[:locale]
-		        { :params => params }
-     		 end
 		end
 	end
 end
