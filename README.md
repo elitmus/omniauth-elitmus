@@ -41,8 +41,8 @@ You can configure several options, which you can pass in to the `provider` metho
 Option name | Default | Explanation
 --- | --- | ---
 `scope` | `public` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope.
-`auth_type` | | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (asks the user to re-authenticate unconditionally). If not specified, default value is nil. (reuses the existing session of last authenticated user if any).
-`display` | `page` | The display context to show the authentication page. Options are: `page`, `popup` and `touch`.
+`auth_type` | nil | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (asks the user to re-authenticate unconditionally). If not specified, default value is nil. (reuses the existing session of last authenticated user if any).
+`callback_path` | '/auth/:provider/callback' | Specify a custom callback URL used during the server-side flow. Note this must be same as specified at the time of your applicaiton registration at www.elitmus.com/oauth/applications. Execution flow returns back to this path at consumer application after authencitcation process taken place at server-side. You need to make an entry for this in config/routes.rb. Strategy automatically will replace ':provider' by provider name as specified in config/initializers/omniauth.rb.
 
 ### Examples 
 
@@ -65,16 +65,16 @@ end
 ```
 If not specified, default is nil.
 
-#### display
+#### callback_path
 
 ```ruby
 use OmniAuth::Builder do
   provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
       { :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }, 
-        :display => 'page'}
+        :callback_path => '/your/custom/callback/path'}
 end
 ```
-If not specified, default is 'page'.
+If not specified, default callback_path is '/auth/:provider/callback'.Here, finally it would be '/auth/elitmus/callback'.
 
 ## Auth Hash
 
@@ -83,10 +83,10 @@ Here's an example *Auth Hash* available in `request.env['omniauth.auth']`:
 ```ruby
 {
   :provider => 'elitmus',
-  :uid => '1234567',
+  :uid => '98979695',
   :info => {
-    :email => 'joe@bloggs.com',
-    :name => 'Joe Bloggs'
+    :email => 'kishoredaa@evergreen.com',
+    :name => 'Kishore Kumar'
   },
   :credentials => {
     :token => 'ABCDEF...', # OAuth 2.0 access_token, which you may wish to store
@@ -95,11 +95,11 @@ Here's an example *Auth Hash* available in `request.env['omniauth.auth']`:
   },
   :extra => {
     :raw_info => {
-      :id => '1234567',
+      :id => '98979695',
       :channel => 'Through a friend',
-      :email => 'joe@bloggs.com',
-      :name => 'Joe Bloggs'
-      :email_lower => 'joe@bloggs.com',
+      :email => 'kishoredaa@evergreen.com',
+      :name => 'Kishore Kumar'
+      :email_lower => 'kishoredaa@evergreen.com',
       :first_login => 'Y',
       :registered_on => '2012-01-17T00:37:29+05:30',
       :source_campus => '0',

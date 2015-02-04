@@ -18,18 +18,26 @@ class ClientTest < StrategyTestCase
     assert_equal '/oauth/token', strategy.client.options[:token_url]
   end
 
-  test 'should be initialized with only site in client_options' do
-    @options = { :client_options => { 'site' => 'https://staging.shrey.com' } }
-    assert_equal 'https://staging.shrey.com', strategy.client.site
+  test 'should be initialized with only site option in symbolized client_options' do
+    @options = { :client_options => { 'site' => 'https://codephode.com' } }
+    assert_equal 'https://codephode.com', strategy.client.site
     assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
     assert_equal '/oauth/token', strategy.client.options[:token_url]
   end
 
-  test 'should be initialized with site and authorize_url in client_options' do
-    @options = { :client_options => { 'site' => 'https://staging.shrey.com', 'authorize_url' => '/custom/auth' } }
-    assert_equal 'https://staging.shrey.com', strategy.client.site
+  test 'should be initialized with site and authorize_url in symbolized client_options' do
+    @options = { :client_options => { 'site' => 'https://codephode.com', 'authorize_url' => '/custom/auth' } }
+    assert_equal 'https://codephode.com', strategy.client.site
     assert_equal '/custom/auth', strategy.client.options[:authorize_url]
     assert_equal '/oauth/token', strategy.client.options[:token_url]
+  end
+
+
+  test 'should be initialized with site and token_url in symbolized client_options' do
+    @options = { :client_options => { 'site' => 'https://codephode.com', 'token_url' => '/custom/token' } }
+    assert_equal 'https://codephode.com', strategy.client.site
+    assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
+    assert_equal '/custom/token', strategy.client.options[:token_url]
   end
 
   test 'should be initialized with symbolized client_options' do
@@ -77,22 +85,23 @@ class AuthorizeParamsTest < StrategyTestCase
     assert_equal 'bar', strategy.authorize_params['scope']
     assert_equal 'baz', strategy.authorize_params['foo']
   end
+
+  test 'should include top-level options with their default values if marked as :authorize_options' do
+    @options = { :authorize_options => [:scope, :foo], :foo => 'baz' }
+    assert_equal 'public', strategy.authorize_params['scope']
+    assert_equal 'baz', strategy.authorize_params['foo']
+  end
     
   test 'should exclude top-level options that are not passed' do
     @options = { :authorize_options => [:bar] }
     refute_has_key :bar, strategy.authorize_params
     refute_has_key 'bar', strategy.authorize_params
   end
+  
   test 'includes default scope for public' do
     assert strategy.authorize_params.is_a?(Hash)
     assert_equal 'public', strategy.authorize_params[:scope]
   end
-
-  # test 'includes display parameter from request when present' do
-  #   @request.stubs(:params).returns({ 'display' => 'page' })
-  #   assert strategy.authorize_params.is_a?(Hash)
-  #   assert_equal 'page', strategy.authorize_params[:display]
-  # end
 
   test 'includes auth_type parameter from request when present' do
     @request.stubs(:params).returns({ 'auth_type' => 'reauthenticate' })
@@ -105,8 +114,6 @@ class AuthorizeParamsTest < StrategyTestCase
     assert strategy.authorize_params.is_a?(Hash)
     assert_equal 'admin', strategy.authorize_params[:scope]
   end
-
-
 end
 
 class UidTest < StrategyTestCase
