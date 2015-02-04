@@ -24,7 +24,7 @@ Or install it yourself as:
 
 OmniAuth::Strategies::Elitmus is simply a Rack middleware.
 
-Here's a quick example, adding the middleware to a Rails app in config/initializers/omniauth.rb. First, register your application at 'www.elitmus.com/oauth/applications' with valid callback url (directing to your app) to get app_id and secret. Now create 'ELITMUS_KEY', 'ELITMUS_SECRET' environement variables which stores the value of your consumer app_id, secret respectively. 
+ First, register your application at 'www.elitmus.com/oauth/applications' with valid callback url (directing to your app) to get app_id and secret. Now create 'ELITMUS_KEY', 'ELITMUS_SECRET' environement variables which stores the value of your consumer app_id, secret respectively. Here's a quick example, adding the middleware to a Rails app in config/initializers/omniauth.rb.
 
 
 ```ruby
