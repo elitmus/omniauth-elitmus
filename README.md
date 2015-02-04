@@ -73,7 +73,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
         :callback_path => '/your/custom/callback/path'}
 end
 ```
-If not specified, default callback_path is '/auth/:provider/callback'.Here, finally it would be '/auth/elitmus/callback'.
+If not specified, default callback_path is '/auth/:provider/callback'.Here, finally it would be '/auth/elitmus/callback' as per explained in configuration table.
 
 ## Auth Hash
 
