@@ -24,7 +24,7 @@ Or install it yourself as:
 
 OmniAuth::Strategies::Elitmus is simply a Rack middleware.
 
- First, register your application at 'www.elitmus.com/oauth/applications' with valid callback url (directing to your app) to get app_id and secret. Now create 'ELITMUS_KEY', 'ELITMUS_SECRET' environement variables which stores the value of your consumer app_id, secret respectively. Here's a quick example, adding the middleware to a Rails app in config/initializers/omniauth.rb.
+ First, register your application at 'www.elitmus.com/oauth/applications' with valid callback url to get app_id and secret (elitmus.com uses callback url to redirect to your app). Create environement variables 'ELITMUS_KEY', 'ELITMUS_SECRET' to store your app_id, secret respectively. Here's a quick example, adding the middleware to a Rails app in config/initializers/omniauth.rb.
 
 
 ```ruby
@@ -41,7 +41,7 @@ Option name | Default | Explanation
 --- | --- | ---
 `scope` | `public` | lets you set scope to provide granular access to different types of data. If not provided, scope defaults to 'public' for users. you can use any one of "write", "public" and "admin" values for scope.
 `auth_type` | nil | Optionally specifies the requested authentication feature. Valid value is 'reauthenticate' (asks the user to re-authenticate unconditionally). If not specified, default value is nil. (reuses the existing session of last authenticated user if any).
-`callback_path` | '/auth/:provider/callback' | Specify a custom callback URL used during the server-side flow. Note this must be same as specified at the time of your applicaiton registration at www.elitmus.com/oauth/applications. Execution flow returns back to this path at consumer application after authencitcation process taken place at server-side. You need to make an entry for this path in config/routes.rb of your consumer application. Strategy automatically will replace ':provider' by provider name as specified in config/initializers/omniauth.rb.
+`callback_path` | '/auth/:provider/callback' | Specify a custom callback URL used during the server-side flow. Note this must be same as specified at the time of your applicaiton registration at www.elitmus.com/oauth/applications. Execution flow returns back to this point at consumer application after authencitcation flow finishes at server-side. If not specified, default is '/auth/:provider/callback'. Make an entry for this end point in config/routes.rb of your consumer application. Strategy automatically replaces ':provider' by provider name as specified in config/initializers/omniauth.rb.
 
 ### Examples 
 
