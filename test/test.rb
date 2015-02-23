@@ -74,17 +74,6 @@ end
 
 class AuthorizeParamsTest < StrategyTestCase
 
-  test 'should include any authorize params passed in the :authorize_params option' do
-    @options = { :authorize_params => { :foo => 'bar', :baz => 'zip' } }
-    assert_equal 'bar', strategy.authorize_params['foo']
-    assert_equal 'zip', strategy.authorize_params['baz']
-  end
-
-  test 'should include top-level options that are marked as :authorize_options' do
-    @options = { :authorize_options => [:scope, :foo], :scope => 'bar', :foo => 'baz' }
-    assert_equal 'bar', strategy.authorize_params['scope']
-    assert_equal 'baz', strategy.authorize_params['foo']
-  end
 
   test 'should include top-level options with their default values if marked as :authorize_options' do
     @options = { :authorize_options => [:scope, :foo], :foo => 'baz' }
@@ -92,12 +81,6 @@ class AuthorizeParamsTest < StrategyTestCase
     assert_equal 'baz', strategy.authorize_params['foo']
   end
     
-  test 'should exclude top-level options that are not passed' do
-    @options = { :authorize_options => [:bar] }
-    refute_has_key :bar, strategy.authorize_params
-    refute_has_key 'bar', strategy.authorize_params
-  end
-  
   test 'includes default scope for public' do
     assert strategy.authorize_params.is_a?(Hash)
     assert_equal 'public', strategy.authorize_params[:scope]
