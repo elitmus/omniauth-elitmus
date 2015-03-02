@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = Omniauth::Elitmus::VERSION
   spec.authors       = ["Shrey Patel"]
   spec.email         = ["shrey@elitmus.com"]
-  spec.summary       = 'Elitmus OAuth2 Strategy for OmniAuth'
+  spec.summary       = 'eLitmus OAuth2 Strategy for OmniAuth'
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,7 +20,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'minitest', '~> 5.5.1'
   spec.add_development_dependency 'mocha', '~>1.1.0'
-  #spec.add_development_dependency "bundler"
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'simplecov'
 end

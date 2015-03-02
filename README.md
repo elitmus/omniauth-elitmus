@@ -1,6 +1,8 @@
 # Omniauth Elitmus
 
-eLitmus OAuth2 Strategy for OmniAuth
+[![Build Status](https://travis-ci.org/elitmus/omniauth-elitmus.svg?branch=master)](https://travis-ci.org/elitmus/omniauth-elitmus)
+
+## eLitmus OAuth2 Strategy for OmniAuth
 
 This is official OmniAuth strategy for authenticating to eLitmus.com. To use it, you'll need to register your consumer application on elitmus.com to get pair of OAuth2 Application ID and Secret.   It supports the OAuth 2.0 server-side and client-side flows for 3rd party OAuth consumer applications 
 
