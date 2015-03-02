@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Shrey Patel"]
   spec.email         = ["shrey@elitmus.com"]
   spec.summary       = 'eLitmus OAuth2 Strategy for OmniAuth'
-  spec.homepage      = ""
+  spec.homepage      = "https://www.eLitmus.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split("\n")

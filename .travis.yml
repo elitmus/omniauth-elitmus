@@ -4,4 +4,4 @@ rvm:
   - ruby-head
   - jruby-head
   - rbx-2
-script: ruby -I./test ./test/test.rb
+script: CODECLIMATE_REPO_TOKEN=839fe72d55965fb683962d15badc954d2723d28f3cddde142cd75a55e6bf9580 ruby -I./test ./test/test.rb
