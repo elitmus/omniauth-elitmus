@@ -1,6 +1,5 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$:.push File.expand_path('../lib', __FILE__)
 require 'omniauth/elitmus/version'
 
 Gem::Specification.new do |spec|
@@ -12,16 +11,16 @@ Gem::Specification.new do |spec|
   spec.homepage      = ""
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+  spec.files         = `git ls-files`.split("\n")
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'omniauth-oauth2', '~> 1.2'
 
-  spec.add_development_dependency 'minitest'
-  spec.add_development_dependency 'mocha'
-  spec.add_development_dependency "bundler", "~> 1.7"
-  spec.add_development_dependency "rake", "~> 10.0"
-  
+  spec.add_development_dependency 'minitest', '~> 5.5.1'
+  spec.add_development_dependency 'mocha', '~>1.1.0'
+  #spec.add_development_dependency "bundler"
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'simplecov'
 end
