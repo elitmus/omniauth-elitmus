@@ -5,8 +5,8 @@ require 'omniauth/elitmus/version'
 Gem::Specification.new do |spec|
   spec.name          = "omniauth-elitmus"
   spec.version       = Omniauth::Elitmus::VERSION
-  spec.authors       = ["Shrey Patel"]
-  spec.email         = ["shrey@elitmus.com"]
+  spec.authors       = ["Shrey Patel","Shireesh Jayashetty"]
+  spec.email         = ["aws@elitmus.com"]
   spec.summary       = 'eLitmus OAuth2 Strategy for OmniAuth'
   spec.homepage      = "https://www.eLitmus.com"
   spec.license       = "MIT"
