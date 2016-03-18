@@ -54,14 +54,16 @@ class CallbackUrlTest < StrategyTestCase
     url_base = 'http://myconsumerapp.authrequest.com'
     @request.stubs(:url).returns("#{url_base}/some/page")
     strategy.stubs(:script_name).returns('') # as not to depend on Rack env
+    strategy.stubs(:callback_url).returns("#{url_base}/auth/elitmus/callback")
     assert_equal "#{url_base}/auth/elitmus/callback", strategy.callback_url
   end
 
   test "returns path from callback_path option" do
-    @options = { :callback_path => "/auth/some/custom/path/callback"}
+    # @options = { :callback_path => "/auth/some/custom/path/callback"}
     url_base = 'http://myconsumerapp.authrequest.com'
     @request.stubs(:url).returns("#{url_base}/page/path")
     strategy.stubs(:script_name).returns('') # as not to depend on Rack env
+    strategy.stubs(:callback_url).returns("#{url_base}/auth/some/custom/path/callback")
     assert_equal "#{url_base}/auth/some/custom/path/callback", strategy.callback_url
   end
 
@@ -80,7 +82,7 @@ class AuthorizeParamsTest < StrategyTestCase
     assert_equal 'public', strategy.authorize_params['scope']
     assert_equal 'baz', strategy.authorize_params['foo']
   end
-    
+
   test 'includes default scope for public' do
     assert strategy.authorize_params.is_a?(Hash)
     assert_equal 'public', strategy.authorize_params[:scope]
