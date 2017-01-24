@@ -1,8 +1,8 @@
 require 'bundler/setup'
 require 'minitest/autorun'
 require 'mocha/setup'
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+# require "codeclimate-test-reporter"
+# CodeClimate::TestReporter.start
 
 require 'simplecov'
 SimpleCov.start
