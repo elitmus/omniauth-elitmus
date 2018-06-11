@@ -1,4 +1,4 @@
-Copyright (c) 2015 Shrey Patel
+Copyright (c) 2018 Shireesh Jayashetty
 
 MIT License
 
