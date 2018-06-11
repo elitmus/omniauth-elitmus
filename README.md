@@ -67,7 +67,8 @@ If not specified, default scope is 'public'
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
-  		{ :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }}
+  		:scope => "admin", 
+  		:authorize_params => { :auth_type => "reauthenticate" }
 end
 ```
 If not specified, default is nil.
@@ -77,8 +78,9 @@ If not specified, default is nil.
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :elitmus, ENV['ELITMUS_KEY'], ENV['ELITMUS_SECRET'], 
-      { :scope => "admin", :authorize_params => { :auth_type => "reauthenticate" }, 
-        :callback_path => '/your/custom/callback/path'}
+        :scope => "admin", 
+        :authorize_params => { :auth_type => "reauthenticate" }, 
+        :callback_path => '/your/custom/callback/path'
 end
 ```
 If not specified, default callback_path is '/auth/:provider/callback'.Here, finally it would be '/auth/elitmus/callback' as per explained in configuration table.
