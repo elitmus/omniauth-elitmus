@@ -43,13 +43,23 @@ module OmniAuth
 			def authorize_params
 				super.tap do |params|
 
-					%w[scope auth_type].each do |v|
-						  rparamsv = request.params[v]
-							if rparamsv
-								params[v.to_sym] = rparamsv
-							end
+					# Reek has a problem with the below code. Trying to rewrite the same
+					#  in a different way to make reek happy
+					#
+					# %w[scope auth_type].each do |val|
+					# 		if request.params[val]
+					# 			params[val.to_sym] = request.params[val]
+					# 		end
+					# end
+					# params[:scope] ||= DEFAULT_SCOPE
+
+					params_hash = request.params
+					if params_hash.has_key?['scope']
+						params[:scope] = params_hash['scope']
+					else
+						params[:scope] = DEFAULT_SCOPE
 					end
-					params[:scope] ||= DEFAULT_SCOPE
+					params[:auth_type] = params_hash['auth_type']  if params_hash.has_key?['auth_type']
 				end
 			end
 
