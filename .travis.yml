@@ -1,7 +1,16 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=839fe72d55965fb683962d15badc954d2723d28f3cddde142cd75a55e6bf9580
 language: ruby
 rvm:
   - 2.2.4
   - 2.3.0
   - 2.5.1
   - jruby-head
-script: CODECLIMATE_REPO_TOKEN=839fe72d55965fb683962d15badc954d2723d28f3cddde142cd75a55e6bf9580 ruby -I./test ./test/test.rb
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script: ruby -I./test ./test/test.rb
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
