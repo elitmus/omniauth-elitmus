@@ -1,10 +1,15 @@
+# ------------------------------------------------------------------
+# This is an implementation of elitmus Oauth strategy
+# couyright (c) elitmus.com
+# ------------------------------------------------------------------
+
 require 'omniauth/strategies/oauth2'
 require 'uri'
 
 module OmniAuth
 	module Strategies
 		class Elitmus < OmniAuth::Strategies::OAuth2
-			# class NoAuthorizationCodeError < StandardError; en				
+			# class NoAuthorizationCodeError < StandardError; en
 			DEFAULT_SCOPE = 'public'
 
 			#OATUH2_PROVIDER_URL = "https://www.elitmus.com"
@@ -17,7 +22,7 @@ module OmniAuth
 			option :authorize_options, [:scope, :auth_type]
 
 			uid {  raw_info['id']  }
-		
+
 			info do
 				prune!({
 					'email' => raw_info['email'],
@@ -25,11 +30,11 @@ module OmniAuth
 			 	})
 			end
 
-			extra do 
+			extra do
 				hash = {}
       			hash['raw_info'] = raw_info unless skip_info?
         		prune! hash
-			end 
+			end
 
 			def raw_info
 				@raw_info ||= access_token.get('/api/v1/me').parsed
@@ -37,14 +42,16 @@ module OmniAuth
 
 			def authorize_params
 				super.tap do |params|
+
 					%w[scope auth_type].each do |v|
-							if request.params[v]
-								params[v.to_sym] = request.params[v]
+						  rparamsv = request.params[v]
+							if rparamsv
+								params[v.to_sym] = rparamsv
 							end
 					end
 					params[:scope] ||= DEFAULT_SCOPE
 				end
-			end	
+			end
 
 			def callback_url
 				options[:callback_url] || super
