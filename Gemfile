@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 platforms :rbx do
-  gem 'rubysl', '~> 2.0'
+  gem 'rubysl'
 end
 
-gem "codeclimate-test-reporter", group: :test, require: nil
+# gem "codeclimate-test-reporter", group: :test, require: nil
