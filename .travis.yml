@@ -1,9 +1,7 @@
 language: ruby
 rvm:
-  - 2.1.7
   - 2.2.4
   - 2.3.0
-  - ruby-head
+  - 2.5.1
   - jruby-head
-  - rbx-2
 script: CODECLIMATE_REPO_TOKEN=839fe72d55965fb683962d15badc954d2723d28f3cddde142cd75a55e6bf9580 ruby -I./test ./test/test.rb
