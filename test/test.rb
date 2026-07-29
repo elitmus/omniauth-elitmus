@@ -11,32 +11,32 @@ class ClientTest < StrategyTestCase
   end
 
   test 'has correct default authorize url' do
-    assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
+    assert_equal 'oauth/authorize', strategy.client.options[:authorize_url]
   end
 
   test 'has correct default token url' do
-    assert_equal '/oauth/token', strategy.client.options[:token_url]
+    assert_equal 'oauth/token', strategy.client.options[:token_url]
   end
 
   test 'should be initialized with only site option in symbolized client_options' do
     @options = { :client_options => { 'site' => 'https://codephode.com' } }
     assert_equal 'https://codephode.com', strategy.client.site
-    assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
-    assert_equal '/oauth/token', strategy.client.options[:token_url]
+    assert_equal 'oauth/authorize', strategy.client.options[:authorize_url]
+    assert_equal 'oauth/token', strategy.client.options[:token_url]
   end
 
   test 'should be initialized with site and authorize_url in symbolized client_options' do
     @options = { :client_options => { 'site' => 'https://codephode.com', 'authorize_url' => '/custom/auth' } }
     assert_equal 'https://codephode.com', strategy.client.site
     assert_equal '/custom/auth', strategy.client.options[:authorize_url]
-    assert_equal '/oauth/token', strategy.client.options[:token_url]
+    assert_equal 'oauth/token', strategy.client.options[:token_url]
   end
 
 
   test 'should be initialized with site and token_url in symbolized client_options' do
     @options = { :client_options => { 'site' => 'https://codephode.com', 'token_url' => '/custom/token' } }
     assert_equal 'https://codephode.com', strategy.client.site
-    assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
+    assert_equal 'oauth/authorize', strategy.client.options[:authorize_url]
     assert_equal '/custom/token', strategy.client.options[:token_url]
   end
 

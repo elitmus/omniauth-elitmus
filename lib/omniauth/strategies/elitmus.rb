@@ -14,7 +14,7 @@ module OmniAuth
 				:site => "https://www.elitmus.com"
 			}
 
-			option :authorize_options, [:scope, :auth_type]
+			option :authorize_options, [:scope, :auth_type, :google_sso, :github_sso]
 
 			uid {  raw_info['id']  }
 		
@@ -37,7 +37,7 @@ module OmniAuth
 
 			def authorize_params
 				super.tap do |params|
-					%w[scope auth_type].each do |v|
+					%w[scope auth_type google_sso github_sso].each do |v|
 							if request.params[v]
 								params[v.to_sym] = request.params[v]
 							end

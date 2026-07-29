@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'eLitmus OAuth2 Strategy for OmniAuth'
   spec.homepage      = "https://github.com/elitmus/omniauth-elitmus"
   spec.license       = "MIT"
+  spec.required_ruby_version = '>= 3.2'
 
   spec.files         = `git ls-files`.split("\n")
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -19,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'omniauth-oauth2', '~> 1.8'
 
   spec.add_development_dependency 'minitest', '~> 5.25'
-  spec.add_development_dependency 'mocha', '~>1.0'
+  spec.add_development_dependency 'mocha', '~> 2.1'
   spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'simplecov', '~> 0.22'
 end
