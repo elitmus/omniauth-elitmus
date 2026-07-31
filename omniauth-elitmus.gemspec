@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'eLitmus OAuth2 Strategy for OmniAuth'
   spec.homepage      = "https://github.com/elitmus/omniauth-elitmus"
   spec.license       = "MIT"
-  spec.required_ruby_version = '>= 3.2'
+  spec.required_ruby_version = '>= 3.1.5'
 
   spec.files         = `git ls-files`.split("\n")
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
