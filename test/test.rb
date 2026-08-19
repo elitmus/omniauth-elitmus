@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'helper'
 require 'omniauth-elitmus'
 
@@ -11,46 +13,44 @@ class ClientTest < StrategyTestCase
   end
 
   test 'has correct default authorize url' do
-    assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
+    assert_equal 'oauth/authorize', strategy.client.options[:authorize_url]
   end
 
   test 'has correct default token url' do
-    assert_equal '/oauth/token', strategy.client.options[:token_url]
+    assert_equal 'oauth/token', strategy.client.options[:token_url]
   end
 
   test 'should be initialized with only site option in symbolized client_options' do
-    @options = { :client_options => { 'site' => 'https://codephode.com' } }
+    @options = { client_options: { 'site' => 'https://codephode.com' } }
     assert_equal 'https://codephode.com', strategy.client.site
-    assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
-    assert_equal '/oauth/token', strategy.client.options[:token_url]
+    assert_equal 'oauth/authorize', strategy.client.options[:authorize_url]
+    assert_equal 'oauth/token', strategy.client.options[:token_url]
   end
 
   test 'should be initialized with site and authorize_url in symbolized client_options' do
-    @options = { :client_options => { 'site' => 'https://codephode.com', 'authorize_url' => '/custom/auth' } }
+    @options = { client_options: { 'site' => 'https://codephode.com', 'authorize_url' => '/custom/auth' } }
     assert_equal 'https://codephode.com', strategy.client.site
     assert_equal '/custom/auth', strategy.client.options[:authorize_url]
-    assert_equal '/oauth/token', strategy.client.options[:token_url]
+    assert_equal 'oauth/token', strategy.client.options[:token_url]
   end
 
-
   test 'should be initialized with site and token_url in symbolized client_options' do
-    @options = { :client_options => { 'site' => 'https://codephode.com', 'token_url' => '/custom/token' } }
+    @options = { client_options: { 'site' => 'https://codephode.com', 'token_url' => '/custom/token' } }
     assert_equal 'https://codephode.com', strategy.client.site
-    assert_equal '/oauth/authorize', strategy.client.options[:authorize_url]
+    assert_equal 'oauth/authorize', strategy.client.options[:authorize_url]
     assert_equal '/custom/token', strategy.client.options[:token_url]
   end
 
   test 'should be initialized with symbolized client_options' do
-    @options = { :client_options => { 'site' => 'https://staging.shrey.com', 'authorize_url' => '/custom/auth', 'token_url' => '/custom/token' } }
+    @options = { client_options: { 'site' => 'https://staging.shrey.com', 'authorize_url' => '/custom/auth', 'token_url' => '/custom/token' } }
     assert_equal 'https://staging.shrey.com', strategy.client.site
     assert_equal '/custom/auth', strategy.client.options[:authorize_url]
     assert_equal '/custom/token', strategy.client.options[:token_url]
   end
-
 end
 
 class CallbackUrlTest < StrategyTestCase
-  test "returns the default callback url" do
+  test 'returns the default callback url' do
     url_base = 'http://myconsumerapp.authrequest.com'
     @request.stubs(:url).returns("#{url_base}/some/page")
     strategy.stubs(:script_name).returns('') # as not to depend on Rack env
@@ -58,7 +58,7 @@ class CallbackUrlTest < StrategyTestCase
     assert_equal "#{url_base}/auth/elitmus/callback", strategy.callback_url
   end
 
-  test "returns path from callback_path option" do
+  test 'returns path from callback_path option' do
     # @options = { :callback_path => "/auth/some/custom/path/callback"}
     url_base = 'http://myconsumerapp.authrequest.com'
     @request.stubs(:url).returns("#{url_base}/page/path")
@@ -67,18 +67,16 @@ class CallbackUrlTest < StrategyTestCase
     assert_equal "#{url_base}/auth/some/custom/path/callback", strategy.callback_url
   end
 
-  test "returns url from callback_url option" do
+  test 'returns url from callback_url option' do
     url = 'http://myconsumerapp.authrequest.com/auth/elitmus/callback'
-    @options = { :callback_url => url }
+    @options = { callback_url: url }
     assert_equal url, strategy.callback_url
   end
 end
 
 class AuthorizeParamsTest < StrategyTestCase
-
-
   test 'should include top-level options with their default values if marked as :authorize_options' do
-    @options = { :authorize_options => [:scope, :foo], :foo => 'baz' }
+    @options = { authorize_options: %i[scope foo], foo: 'baz' }
     assert_equal 'public', strategy.authorize_params['scope']
     assert_equal 'baz', strategy.authorize_params['foo']
   end
@@ -92,6 +90,12 @@ class AuthorizeParamsTest < StrategyTestCase
     @request.stubs(:params).returns({ 'auth_type' => 'reauthenticate' })
     assert strategy.authorize_params.is_a?(Hash)
     assert_equal 'reauthenticate', strategy.authorize_params[:auth_type]
+  end
+
+  test 'includes disable_external_sso parameter from request when present' do
+    @request.stubs(:params).returns({ 'disable_external_sso' => 'true' })
+    assert strategy.authorize_params.is_a?(Hash)
+    assert_equal 'true', strategy.authorize_params[:disable_external_sso]
   end
 
   test 'overrides default scope with parameter passed from request' do
@@ -113,7 +117,7 @@ class UidTest < StrategyTestCase
 end
 
 class InfoTestOptionalDataPresent < StrategyTestCase
-   def setup
+  def setup
     super
     @raw_info ||= { 'name' => 'Fred Smith' }
     strategy.stubs(:raw_info).returns(@raw_info)
@@ -127,7 +131,6 @@ class InfoTestOptionalDataPresent < StrategyTestCase
     @raw_info['email'] = 'fred@smith.com'
     assert_equal 'fred@smith.com', strategy.info['email']
   end
-
 end
 
 class InfoTestOptionalDataNotPresent < StrategyTestCase
@@ -175,17 +178,15 @@ class RawInfoTest < StrategyTestCase
     super
     @access_token = stub('OAuth2::AccessToken')
     @appsecret_proof = 'appsecret_proof'
-    @options = {:appsecret_proof => @appsecret_proof}
+    @options = { appsecret_proof: @appsecret_proof }
   end
 
   test 'should not include raw_info in extras hash when skip_info is specified' do
-    @options = { :skip_info => true }
-    strategy.stubs(:raw_info).returns({:foo => 'bar' })
+    @options = { skip_info: true }
+    strategy.stubs(:raw_info).returns({ foo: 'bar' })
     refute_has_key 'raw_info', strategy.extra
   end
 end
-
-
 
 class CredentialsTest < StrategyTestCase
   def setup
@@ -253,5 +254,4 @@ class ExtraTest < StrategyTestCase
   test 'contains raw info' do
     assert_equal({ 'raw_info' => @raw_info }, strategy.extra)
   end
-
 end

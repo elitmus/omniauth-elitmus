@@ -1,0 +1,22 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.1
+  Exclude:
+    - 'bin/**/*'
+    - 'coverage/**/*'
+    - 'vendor/**/*'
+
+Naming/FileName:
+  Exclude:
+    - 'lib/omniauth-elitmus.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'test/**/*'
+    - '*.gemspec'
