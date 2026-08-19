@@ -14,7 +14,7 @@ module OmniAuth
 				:site => "https://www.elitmus.com"
 			}
 
-			option :authorize_options, [:scope, :auth_type]
+			option :authorize_options, [:scope, :auth_type, :disable_external_sso]
 
 			uid {  raw_info['id']  }
 		
@@ -37,17 +37,24 @@ module OmniAuth
 
 			def authorize_params
 				super.tap do |params|
-					%w[scope auth_type].each do |v|
+					%w[scope auth_type disable_external_sso].each do |v|
 							if request.params[v]
 								params[v.to_sym] = request.params[v]
 							end
 					end
 					params[:scope] ||= DEFAULT_SCOPE
 				end
-			end	
+			end
 
 			def callback_url
-				options[:callback_url] || super
+				# NOTE: intentionally NOT calling `super` here. OmniAuth's default
+				# callback_url is `full_host + callback_path + query_string`, where
+				# query_string is whatever happens to be on the CURRENT request. That
+				# makes redirect_uri drift between the /authorize request (which may
+				# carry extra params like disable_external_sso) and the token-exchange
+				# request (which additionally has code/state on it) - and OAuth2
+				# requires both to match exactly, so any drift breaks the exchange.
+				options[:callback_url] || (full_host + callback_path)
 			end
 
 			def prune!(hash)
